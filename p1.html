@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<link rel="stylesheet" href="./p1.css">
+</head>
+<body>
+    <div class="min">
+        <button class="border-2 p-2 m-1 b1">logout</button>
+    <h1 class="text-red-500 text-center text-3xl underline decoration-blue-500">welcome to the image gallery</h1>
+</div>
+    <div class="main flex flex-wrap w-full h-full  gap-4 p-2 justify-center  "></div>
+    <script>
+            const url= 'https://image-project-2-3.onrender.com'
+        axios.get("http://127.0.0.1:8080/api/v1/user/image")
+        .then((response)=>{
+            let arr=response.data;
+     console.log(arr)
+     let t=document.querySelector(".main");
+
+     for(let i=0;i<arr.length;i++)
+     {
+        //create a div element
+        let p=document.createElement("div");
+      let img_ele=document.createElement("img");
+
+      p.prepend(img_ele);
+      img_ele.setAttribute("src",arr[i].url);
+      img_ele.className='md:w-[460px] md:h-[400px]  hover:rounded-2xl'
+        p.className='md:w-[460px] md:h-[400px] hover:cursor-pointer border-2 hover:rounded-2xl hover:shadow-lg hover:shadow-red-100 hover:animate-pulse'
+      
+    //    console.log(p)
+    // p.innerText="hello";
+    t.appendChild(p);
+        
+     }
+    })
+     .catch((err)=>{
+        console.log("error");
+     })
+      
+     let btn=document.querySelector(".b1");
+     btn.addEventListener("click",()=>{
+        // console.log("click")
+        axios.get(`${url}/api/v1/user/logout`)
+        .then((response)=>{
+            let t=response.data;
+            console.log(t);
+            if(t=="logout successfully...")
+            window.location.href = "./index.html"; 
+        })
+        .catch((err)=>{
+            console.log(err);
+        })
+     })
+    </script>
+</body>
+</html>

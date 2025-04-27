@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <h1>welcome to the signup page</h1>
+    <form class="a">
+        <label for="s">Name:</label>
+        <input class="i" type="text" name="name" id="s"><br><br>
+        <label for="a">Email:</label>
+        <input class="j" type="text" name="email" id="a"><br><br>
+        <label for="m">Password:</label>
+        <input class="k" type="text" name="password" id="m"><br><br>
+        <button>register</button>
+    </form>
+    <div class="div"></div>
+    <script>
+            const url= 'https://image-project-2-3.onrender.com'
+        let d=document.querySelector(".a");
+// console.log(d)
+let find_ele=document.querySelector("div");
+
+d.addEventListener("submit",(e)=>{
+    e.preventDefault();
+    let val1=document.querySelector(".i").value;
+    let val2=document.querySelector(".j").value;
+    let val3=document.querySelector(".k").value;
+ axios.post(`${url}/api/v1/user/register`,
+    {name:val1,
+        email:val2,
+        password:val3
+    })
+    .then(function (response) {
+      const t=response.data;
+     find_ele.innerHTML=`<h1>${t}</h1>`
+     if(t=="user is registered successfully...")
+     {
+        setTimeout(()=>{
+            window.location.href = "./index.html"; 
+        },1000)
+     }
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+ 
+    
+})
+    </script>
+</body>
+</html>

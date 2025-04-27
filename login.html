@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="./p1.css">
+</head>
+<body>
+  
+  <div class="main"></div>
+    <h1>welcome to the login page</h1>
+    <form class="jack">
+        <label for="tim" class="x">email</label>
+<input type="text" name="email" id="tim"><br><br>
+<label class="y" for="cook">password</label>
+<input type="text" name="" id="cook"><br><br>
+<button>login</button>
+    </form>
+    <div class="div"></div>
+   <script>
+    const url= 'https://image-project-2-3.onrender.com'
+    let t=document.querySelector(".jack");
+    let head=document.querySelector("h1");
+
+let ele=document.querySelector("div");
+t.addEventListener("submit",(e)=>{
+  e.preventDefault();
+  let val1=document.querySelector("#tim").value;
+  let val2=document.querySelector("#cook").value;
+ 
+  axios.post(`${url}/api/v1/user/login`,{
+    email:val1,
+    password:val2
+  }, {withCredentials: true})
+  .then(function (response) {
+    const z=response.data;
+   if(z!="login sucessfully.")
+   {
+// console.log(true);
+   ele.innerHTML=`<h1>${z}</h1>`
+   }
+else{
+  window.location.href = "./p1.html"; 
+}
+//      y.addEventListener("click",()=>{
+//           axios.get("http://127.0.0.1:8080/api/v1/user/logout")
+//           .then((res)=>{
+//             // ele.remove();
+            
+//             console.log(res);
+//           })
+//           .catch((err)=>{
+//             console.log(err);
+//           })
+//         })
+//    }
+
+  //  console.log(z);
+      // console.log(response);
+})
+    .catch(function (error) {
+      console.log(error);
+    });
+})
+   </script>
+</body>
+</html>
